@@ -1,6 +1,6 @@
 # PSI
 
-Sztuczna sieć neuronowa klasyfikująca próbki produktów spożywczych
+Sztuczna sieć neuronowa klasyfikująca
 
 Harmonogram:
 1. analiza zagadnienia klasyfikacji
