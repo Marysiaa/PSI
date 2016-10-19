@@ -21,7 +21,7 @@ private:
 	double * input_10 = new double[2]{ 1,0 };
 	double * input_11 = new double[2]{ 1,1 };
 
-	double learn_number = 1;
+	double learn_number = 0.6;
 
 public:
 	LogicGates()

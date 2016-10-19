@@ -121,6 +121,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClassificationFunction.h" />
     <ClInclude Include="LogicGates.h" />
     <ClInclude Include="NetworkController.h" />
     <ClInclude Include="Perceptron.h" />

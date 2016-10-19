@@ -29,5 +29,8 @@
     <ClInclude Include="LogicGates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClassificationFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

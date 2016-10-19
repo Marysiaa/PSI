@@ -55,7 +55,7 @@ public:
 
 	void learn(double wanted_out, double learn_number) 
 	{
-		ask();
+//		ask();
 
 		w_0 += (wanted_out - output) * learn_number;
 		for (int i = 0; i < size; i++)
