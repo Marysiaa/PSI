@@ -2,16 +2,16 @@
 #define LOGIC_GATES_H
 
 #include<iostream>
-#include"NetworkController.h"
+#include"PerceptronController.h"
 
 using namespace std;
 
 class LogicGates
 {
 private:
-	NetworkController * network_controller_OR;
-	NetworkController * network_controller_AND;
-	NetworkController * network_controller_NOT;
+	PerceptronController * network_controller_OR;
+	PerceptronController * network_controller_AND;
+	PerceptronController * network_controller_NOT;
 
 	double * input_0 = new double[1]{ 0 };
 	double * input_1 = new double[1]{ 1 };
@@ -27,11 +27,11 @@ public:
 	LogicGates()
 	{
 		int * size_of_lay = new int[2]{ 2,1 };
-		network_controller_OR = new NetworkController(2, size_of_lay);
-		network_controller_AND = new NetworkController(2, size_of_lay);
+		network_controller_OR = new PerceptronController(2, size_of_lay);
+		network_controller_AND = new PerceptronController(2, size_of_lay);
 
 		int * size_of_lay_NOT = new int[2]{ 1,1 };
-		network_controller_NOT = new NetworkController(2, size_of_lay_NOT);
+		network_controller_NOT = new PerceptronController(2, size_of_lay_NOT);
 				
 		delete[] size_of_lay_NOT;
 		delete[] size_of_lay;

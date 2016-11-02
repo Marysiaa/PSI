@@ -4,21 +4,46 @@
 #include<iostream>
 
 #include"Perceptron.h"
-#include"NetworkController.h"
+#include"PerceptronController.h"
 #include"LogicGates.h"
 #include"ClassificationFunction.h"
+#include"Adaline.h"
+#include"AdalineController.h"
 
 using namespace std;
+
+void logic_gates();
+void classification_function();
 
 int main() 
 {
 	srand(time(NULL));
+/*
+	bramki logiczne
+	logic_gates();
+ */
 
-	//bramki logiczne
-	/*
+/*
+	funkcja klasyfikujaca
+	classification_function();
+ */
+
+/*
+	adaline
+ */
+	cout << "keep doing this adaline shit" << endl;
+	Adaline adaline;
+
+
+//	system("pause");
+	return 0;
+}
+
+void logic_gates(){
+
 	LogicGates logic_gates;
-
 	cout << "\nOR\nbez uczenia:\n";
+
 	logic_gates.asking_OR();
 	for (int i = 0; i < 5; i++)
 	{
@@ -44,15 +69,16 @@ int main()
 		logic_gates.learning_NOT();
 		logic_gates.asking_NOT();
 	}
-	*/
+}
 
-	//funkcja klasyfikujaca
+void classification_function(){
+
 	ClassificationFunction classification;
 
 	cout << "\nklasyfikacja\nbez uczenia:\t";
 	cout << classification.testing() << "%" << endl;
 
-	int amount_of_iterations = 100;
+	int amount_of_iterations = 10;
 	for (int i = 0; i < amount_of_iterations; i++)
 	{
 		classification.learning();
@@ -61,6 +87,4 @@ int main()
 //	cout << "po " << amount_of_iterations << " iteracjach uczenia:\n";
 //	classification.testing();
 
-	system("pause");
-	return 0;
 }

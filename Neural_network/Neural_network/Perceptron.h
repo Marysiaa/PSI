@@ -77,6 +77,7 @@ public:
 	}
 
 private:  
+	//funkcja aktywacji
 	double interpret(double s) 
 	{
 		return s;

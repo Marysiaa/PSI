@@ -3,15 +3,15 @@
 
 #include<iostream>
 #include<math.h>
-#include"NetworkController.h"
+#include"PerceptronController.h"
 
 using namespace std;
 
 class ClassificationFunction
 {
 private:
-	NetworkController * controller;
-	double learn_number = 0.6;
+	PerceptronController * controller;
+	double learn_number; // = 0.6;
 
 	double function(double x) 
 	{
@@ -26,8 +26,13 @@ public:
 
 	ClassificationFunction() 
 	{
-		int * size_of_lay = new int[2]{ 1,1 };
-		controller = new NetworkController(2, size_of_lay);
+		learn_number = 0.6;
+
+		int * size_of_lay = new int[2]; //{ 1,1 };
+		size_of_lay[0]=1;
+		size_of_lay[1]=1;
+
+		controller = new PerceptronController(2, size_of_lay);
 	}
 
 	void asking(double x)
