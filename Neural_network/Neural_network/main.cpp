@@ -9,11 +9,14 @@
 #include"ClassificationFunction.h"
 #include"Adaline.h"
 #include"AdalineController.h"
+#include"Adaline_MLP.h"
+#include"XOR.h"
 
 using namespace std;
 
 void logic_gates();
 void classification_function();
+void XOR_function();
 
 int main() 
 {
@@ -31,12 +34,37 @@ int main()
 /*
 	adaline
  */
-	cout << "keep doing this adaline shit" << endl;
-	Adaline adaline;
-
+	XOR_function();
 
 //	system("pause");
 	return 0;
+}
+
+void XOR_function(){
+
+	cout << "\tXOR" << endl;
+	XOR xor_f;
+	//XOR xor_infinity;
+
+	cout << "bez uczenia:" << endl;
+	xor_f.ask_xor(0, 1);
+
+	cout << "po 5-ciu iteracjach:" << endl;
+	xor_f.learn(1);
+	xor_f.ask_xor(0, 0);
+	xor_f.ask_xor(1, 0);
+	xor_f.ask_xor(0, 1);
+	xor_f.ask_xor(1, 1);
+
+	xor_f.learn(1000);
+	xor_f.ask_xor(0, 0);
+	xor_f.ask_xor(1, 0);
+	xor_f.ask_xor(0, 1);
+	xor_f.ask_xor(1, 1);
+
+	//cout << "szybkosc uczenia:" << endl;
+	//xor_infinity.learn_until_learned();
+	//xor_infinity.ask_xor(0, 1);
 }
 
 void logic_gates(){

@@ -52,27 +52,37 @@ public:
 private:
 	void initialize_network()
 	{
-		Adaline ** tmp_adalines_old, ** tmp_adalines;
+		Adaline * tmp_adalines_old, * tmp_adalines;
+
+		adalines = new Adaline *[amount_of_lays];
 		for(int i=0; i< amount_of_lays ; i++ )
 		{
-			tmp_adalines= new Adaline *[size_of_lay[i]];
+			tmp_adalines= new Adaline [size_of_lay[i]];
+			if( i == 0 )
+			{
+			}
+
 			for(int j=0; j< size_of_lay[i] ; j++ )
 			{
-				if(j != 0 )
+				if(i != 0 )
 				{
-					tmp_adalines[j] = new Adaline(size_of_lay[i-1], tmp_adalines_old);
-					tmp_adalines[j]->learn_number = learn_number;
+					tmp_adalines[j] = *(new Adaline(size_of_lay[i-1], tmp_adalines_old));
+					tmp_adalines[j].learn_number = learn_number;
 				}
 				else
 				{
-					tmp_adalines[j] = new Adaline();
+					tmp_adalines[j] = *(new Adaline());
 				}
 			}
 			tmp_adalines_old = tmp_adalines;
-			if( i == 0 )
-			{
-				adalines = tmp_adalines;
-			}
+			/*
+			Adaline *tmp = new Adaline[size_of_lay[i]];
+			for(int j=0; j< size_of_lay[i] ; j++ ){
+				tmp[j] = *tmp_adalines[j];
+			}*/
+
+			adalines[i] = tmp_adalines;
+
 		}
 	}
 

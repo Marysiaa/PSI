@@ -10,6 +10,7 @@
 // Adaline - neuron implementujacy regule delty
 
 #include<math.h>
+#include<stdlib.h>
 
 class Adaline
 {
@@ -24,7 +25,10 @@ public:
 	double learn_number;
 	double output, wanted_out;
 
-	Adaline() {};
+	Adaline() {
+//		learn_number = 0.6;
+
+	}
 	Adaline(int size, Adaline * adaline)
 	{
 		learn_number = 0.6;
@@ -117,6 +121,7 @@ public:
 		this->size = p1.size;
 		this->output = p1.output;
 		this->w_0 = p1.w_0;
+		this->learn_number = p1.learn_number;
 
 		return *this;
 	}
