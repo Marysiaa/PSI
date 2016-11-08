@@ -23,7 +23,7 @@ public:
 		int size_of_lay[] = {2, 4, 1};
 		int * wsk = &size_of_lay[0];
 
-		double err = 0.1;
+		double err = 0.4;
 		adaline_mlp = new Adaline_MLP( 3, wsk, err);
 
 		learn_data = new Learn_data[4];

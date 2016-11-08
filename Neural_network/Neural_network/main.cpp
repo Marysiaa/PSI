@@ -33,8 +33,8 @@ int main()
 
 /*
 	adaline
- */
 	XOR_function();
+ */
 
 //	system("pause");
 	return 0;
@@ -43,9 +43,9 @@ int main()
 void XOR_function(){
 
 	cout << "\tXOR" << endl;
-	XOR xor_f;
-	//XOR xor_infinity;
 
+/*
+	XOR xor_f;
 	cout << "bez uczenia:" << endl;
 	xor_f.ask_xor(0, 1);
 
@@ -61,10 +61,13 @@ void XOR_function(){
 	xor_f.ask_xor(1, 0);
 	xor_f.ask_xor(0, 1);
 	xor_f.ask_xor(1, 1);
-
-	//cout << "szybkosc uczenia:" << endl;
-	//xor_infinity.learn_until_learned();
-	//xor_infinity.ask_xor(0, 1);
+*/
+/*
+	XOR xor_infinity;
+	cout << "szybkosc uczenia:" << endl;
+	//	xor_infinity.learn_until_learned();
+	xor_infinity.ask_xor(0, 1);
+*/
 }
 
 void logic_gates(){
