@@ -23,7 +23,7 @@ public:
 		int size_of_lay[] = {2, 4, 1};
 		int * wsk = &size_of_lay[0];
 
-		double err = 0.4;
+		double err = 0.1;
 		adaline_mlp = new Adaline_MLP( 3, wsk, err);
 
 		learn_data = new Learn_data[4];
@@ -32,39 +32,39 @@ public:
 		learn_data[0].input[0] = 0;
 		learn_data[0].input[1] = 0;
 		learn_data[0].wanted_output = new double[1];
-		learn_data[0].wanted_output[0] = 1;
+		learn_data[0].wanted_output[0] = 0;
 
 		learn_data[1].input = new double[2];
 		learn_data[1].input[0] = 0;
 		learn_data[1].input[1] = 1;
 		learn_data[1].wanted_output = new double[1];
-		learn_data[1].wanted_output[0] = 0;
+		learn_data[1].wanted_output[0] = 1;
 
 		learn_data[2].input = new double[2];
 		learn_data[2].input[0] = 1;
 		learn_data[2].input[1] = 0;
 		learn_data[2].wanted_output = new double[1];
-		learn_data[2].wanted_output[0] = 0;
+		learn_data[2].wanted_output[0] = 1;
 
 		learn_data[3].input = new double[2];
 		learn_data[3].input[0] = 1;
 		learn_data[3].input[1] = 1;
 		learn_data[3].wanted_output = new double[1];
-		learn_data[3].wanted_output[0] = 1;
+		learn_data[3].wanted_output[0] = 0;
 	}
 
 	void learn_until_learned()
 	{
-		cout << "zaczynam... " << endl;
+		//cout << "zaczynam... " << endl;
 		int iterations_until_learned = adaline_mlp->learn_until_learned( learn_data, 4);
 		cout << "iterations_until_learned:\t" << iterations_until_learned << endl;
 	}
 
 	void learn(int amount_of_iterations )
 	{
-
-		double mistake = adaline_mlp->learn_function(amount_of_iterations, learn_data, 4 );
-		cout << "mistake:\t" << mistake << endl;
+		//double mistake =
+		adaline_mlp->learn_function(amount_of_iterations, learn_data, 4 );
+		//cout << "max blad:\t" << mistake << endl;
 	}
 
 	void ask_xor( double x1, double x2)

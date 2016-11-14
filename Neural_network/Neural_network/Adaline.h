@@ -27,7 +27,6 @@ public:
 
 	Adaline() {
 //		learn_number = 0.6;
-
 	}
 	Adaline(int size, Adaline * adaline)
 	{
@@ -104,7 +103,7 @@ public:
 
 	void mistake_function_set_weights()		//ustwaianie wag
 	{
-		w_0 += mistake * learn_number * pochodna_activation_function(output);
+		w_0 += (mistake * learn_number * pochodna_activation_function(output) );
 
 		for (int i = 0; i < size; i++)
 		{
@@ -113,7 +112,6 @@ public:
 		}
 	}
 
-	//TODO
 	Adaline & operator = (Adaline & p1)
 	{
 		this->input = p1.input;
@@ -130,14 +128,16 @@ private:
 	double activation_function(double s)
 	{
 		double result, beta = 0.6;
-		result = 1 / (1 + exp(-beta * s));
+		result = 1.0 / (1.0 + exp((-beta) * s));
 
 		return result;
 	}
 
 	double pochodna_activation_function(double x)
 	{
-		double result = activation_function(x) * ( 1 - activation_function(x) );
+		//double result = activation_function(x) * ( 1.0 - activation_function(x) );
+		double result = x * ( 1.0 - x );
+
 		return result;
 	}
 

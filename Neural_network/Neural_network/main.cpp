@@ -3,14 +3,10 @@
 #include<math.h>
 #include<iostream>
 
-#include"Perceptron.h"
-#include"PerceptronController.h"
 #include"LogicGates.h"
 #include"ClassificationFunction.h"
-#include"Adaline.h"
-#include"AdalineController.h"
-#include"Adaline_MLP.h"
 #include"XOR.h"
+#include"HebbUsage.h"
 
 using namespace std;
 
@@ -36,38 +32,100 @@ int main()
 	XOR_function();
  */
 
+/*
+	hebb
+	cout << "Hebb\n\n";
+ */
+
+
+
 //	system("pause");
+	int a;
+	cin >> a;
+
 	return 0;
 }
 
 void XOR_function(){
 
-	cout << "\tXOR" << endl;
+	cout << "\t\tXOR" << endl;
+	int x = 0;
 
-/*
 	XOR xor_f;
-	cout << "bez uczenia:" << endl;
-	xor_f.ask_xor(0, 1);
-
-	cout << "po 5-ciu iteracjach:" << endl;
-	xor_f.learn(1);
+	cout << "\n\tbez uczenia:" << endl;
 	xor_f.ask_xor(0, 0);
 	xor_f.ask_xor(1, 0);
 	xor_f.ask_xor(0, 1);
 	xor_f.ask_xor(1, 1);
 
-	xor_f.learn(1000);
+	x = 1;
+	cout << "\n\tpo " << x <<" iteracjach:" << endl;
+
+	xor_f.learn(x);
+
 	xor_f.ask_xor(0, 0);
 	xor_f.ask_xor(1, 0);
 	xor_f.ask_xor(0, 1);
 	xor_f.ask_xor(1, 1);
-*/
-/*
+
+	x = 10;
+	cout << "\n\tpo " << x <<" iteracjach:" << endl;
+
+	xor_f.learn(x);
+
+	xor_f.ask_xor(0, 0);
+	xor_f.ask_xor(1, 0);
+	xor_f.ask_xor(0, 1);
+	xor_f.ask_xor(1, 1);
+
+	x = 100;
+	cout << "\n\tpo " << x <<" iteracjach:" << endl;
+
+	xor_f.learn(x);
+
+	xor_f.ask_xor(0, 0);
+	xor_f.ask_xor(1, 0);
+	xor_f.ask_xor(0, 1);
+	xor_f.ask_xor(1, 1);
+
+	x = 1000;
+	cout << "\n\tpo " << x <<" iteracjach:" << endl;
+
+	xor_f.learn(x);
+
+	xor_f.ask_xor(0, 0);
+	xor_f.ask_xor(1, 0);
+	xor_f.ask_xor(0, 1);
+	xor_f.ask_xor(1, 1);
+
+	x = 10000;
+	cout << "\n\tpo " << x <<" iteracjach:" << endl;
+
+	xor_f.learn(x);
+
+	xor_f.ask_xor(0, 0);
+	xor_f.ask_xor(1, 0);
+	xor_f.ask_xor(0, 1);
+	xor_f.ask_xor(1, 1);
+
+	x = 100000;
+	cout << "\n\tpo " << x <<" iteracjach:" << endl;
+
+	xor_f.learn(x);
+
+	xor_f.ask_xor(0, 0);
+	xor_f.ask_xor(1, 0);
+	xor_f.ask_xor(0, 1);
+	xor_f.ask_xor(1, 1);
+
 	XOR xor_infinity;
-	cout << "szybkosc uczenia:" << endl;
-	//	xor_infinity.learn_until_learned();
+	cout << "\n\tszybkosc uczenia:" << endl;
+		xor_infinity.learn_until_learned();
+
+	xor_infinity.ask_xor(0, 0);
+	xor_infinity.ask_xor(1, 0);
 	xor_infinity.ask_xor(0, 1);
-*/
+	xor_infinity.ask_xor(1, 1);
 }
 
 void logic_gates(){
