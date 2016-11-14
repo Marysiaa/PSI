@@ -124,21 +124,6 @@ public:
 		}
 	}
 
-	double get_max_mistake(double *outs, double * results, int size_of_results)
-	{
-		double max_actual = 0, tmp;
-		for(int i = 0; i < size_of_results; i++){
-			tmp = results[i] - outs[i];
-			if(tmp < 0)
-				tmp = -tmp;
-			if(max_actual < tmp)
-				max_actual = tmp;
-		}
-		return max_actual;
-	}
-
-	//double learn_arr
-
 };
 
 #endif /* HEBBNEURONCONTROLLER_H_ */
