@@ -21,7 +21,9 @@ public:
 	HebbNeuronController( int amount_of_lays , int * size_of_lay )
 	{
 		this->amount_of_lays = amount_of_lays;
-		learn_number = 0.6;
+
+		//------------------------ STALA UCZENIA --------------------------//
+		learn_number = 0.1;
 
 		this->size_of_lay = new int[amount_of_lays];
 		for (int i = 0; i < amount_of_lays; i++)
@@ -46,9 +48,10 @@ public:
 
 	void initialize_network()
 	{
-		HebbNeuron * hebb_previous = NULL;
+		HebbNeuron * hebb_previous;
+		hebb_neuron = new HebbNeuron *[amount_of_lays];
 
-		for(int i = 1 ; i< amount_of_lays; i++){
+		for(int i = 0 ; i< amount_of_lays; i++){
 
 			HebbNeuron * hebb_actual = new HebbNeuron[ size_of_lay[i] ];
 
@@ -61,10 +64,10 @@ public:
 				else{
 					hebb_actual[j] = *(new HebbNeuron());
 				}
-
-				hebb_previous = hebb_actual;
-				hebb_neuron[i] = hebb_actual;
 			}
+
+			hebb_previous = hebb_actual;
+			hebb_neuron[i] = hebb_actual;
 		}
 
 	}
@@ -87,17 +90,15 @@ public:
 
 		double * result = new double[size_of_lay[amount_of_lays -1]];
 
-		//neurony ostatniej warstwy
 		for(int k = 0; k< size_of_lay[amount_of_lays -1]; k++){
 			result[k] = hebb_neuron[amount_of_lays -1][k].output;
 		}
-
 		return result;
 	}
 
 	void learn(double * input)
 	{
-		//set_input(input);
+		set_input(input);
 		ask(input);
 
 		for(int i = 1 ; i< amount_of_lays; i++){
@@ -109,7 +110,7 @@ public:
 
 	void learn( double * input, double * waned_out)
 	{
-		//set_input(input);
+		set_input(input);
 		ask(input);
 
 		for(int i = 0; i<  size_of_lay[ amount_of_lays -1 ]; i++){
@@ -123,6 +124,20 @@ public:
 		}
 	}
 
+	double get_max_mistake(double *outs, double * results, int size_of_results)
+	{
+		double max_actual = 0, tmp;
+		for(int i = 0; i < size_of_results; i++){
+			tmp = results[i] - outs[i];
+			if(tmp < 0)
+				tmp = -tmp;
+			if(max_actual < tmp)
+				max_actual = tmp;
+		}
+		return max_actual;
+	}
+
+	//double learn_arr
 
 };
 

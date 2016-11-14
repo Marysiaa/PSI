@@ -30,6 +30,7 @@ public:
 		this->size = size;
 
 		weight = new double[size];
+
 		initialize_weight();
 
 		input = new HebbNeuron [size];
@@ -57,8 +58,9 @@ public:
 
 	double activation_function(double s)
 	{
-		double alfa = 0.6;
-		double result = 1.0 / (1.0 + exp((-alfa) * s));
+		double result, beta = 0.6;
+		result = 1.0 / (1.0 + exp((-beta) * s));
+
 		return result;
 	}
 
@@ -76,6 +78,7 @@ public:
 	{
 		for(int i = 0; i < size; i++)
 			weight[i] += learn_number * d * input[i].output;
+
 		w_0 += learn_number * d;
 	}
 
@@ -83,6 +86,7 @@ public:
 	{
 		for(int i = 0; i < size; i++)
 			weight[i] += learn_number * output * input[i].output;
+
 		w_0 += learn_number * output;
 	}
 

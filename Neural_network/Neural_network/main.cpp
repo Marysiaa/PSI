@@ -13,6 +13,7 @@ using namespace std;
 void logic_gates();
 void classification_function();
 void XOR_function();
+void Hebb();
 
 int main() 
 {
@@ -34,16 +35,100 @@ int main()
 
 /*
 	hebb
-	cout << "Hebb\n\n";
  */
-
+	Hebb();
 
 
 //	system("pause");
-	int a;
-	cin >> a;
 
 	return 0;
+}
+
+void Hebb(){
+	cout << "\t\tHebb\n";
+
+	//int amonut_of_iterations = 1;
+	int rows_of_data = 9;
+	int columns_of_data = 2;
+	double result;
+
+	HebbUsage * hebbUsage = new HebbUsage( columns_of_data, rows_of_data);
+
+	double ** learn_data = new double* [rows_of_data];
+	for( int i = 0; i< rows_of_data; i ++){
+		learn_data[i] = new double [columns_of_data];
+	}
+	double * learn_data_1 = new double[9];
+	double * learn_data_2 = new double[9];
+
+	//dane 1:
+	learn_data_1[0] = -1;
+	learn_data_1[1] = 1;
+	learn_data_1[2] = -1;
+	learn_data_1[3] = 1;
+	learn_data_1[4] = -1;
+	learn_data_1[5] = 1;
+	learn_data_1[6] = -1;
+	learn_data_1[7] = 1;
+	learn_data_1[8] = -1;
+
+	//dane 2:
+	learn_data_2[0] = -1;
+	learn_data_2[1] = 1;
+	learn_data_2[2] = 1;
+	learn_data_2[3] = 1;
+	learn_data_2[4] = 1;
+	learn_data_2[5] = 1;
+	learn_data_2[6] = 1;
+	learn_data_2[7] = 1;
+	learn_data_2[8] = 1;
+
+	learn_data[0] = learn_data_1;
+	learn_data[1] = learn_data_2;
+
+	//-------------------------------------------
+
+/*
+		cout << "\nlearn_without_supervisor\n";
+
+	hebbUsage->learn_without_supervisor(learn_data, 1);
+		result = hebbUsage->ask( learn_data_1 );
+		cout << "\t" << result << "\n";
+		result = hebbUsage->ask( learn_data_2 );
+		cout << "\t" << result << "\n";
+
+	hebbUsage->learn_without_supervisor(learn_data, 3);
+		result = hebbUsage->ask( learn_data_1 );
+		cout << "\t" << result << "\n";
+		result = hebbUsage->ask( learn_data_2 );
+		cout << "\t" << result << "\n";
+*/
+/*
+		cout << "\nlearn_with_supervisor\n";
+	hebbUsage->learn_with_supervisor(learn_data, 1);
+		result = hebbUsage->ask( learn_data_1 );
+		cout << "\t" << result << "\n";
+		result = hebbUsage->ask( learn_data_2 );
+		cout << "\t" << result << "\n";
+
+	hebbUsage->learn_without_supervisor(learn_data, 3);
+		result = hebbUsage->ask( learn_data_1 );
+		cout << "\t" << result << "\n";
+		result = hebbUsage->ask( learn_data_2 );
+		cout << "\t" << result << "\n";
+*/
+
+	//------------------------------------------
+	/*
+	for (int i = 0; i< columns_of_data; i++){
+		cout << result[i] << "\t";
+	}
+	*/
+
+	for( int i = 0; i< rows_of_data; i ++){
+		delete [] learn_data[i];
+	}
+	delete learn_data;
 }
 
 void XOR_function(){
