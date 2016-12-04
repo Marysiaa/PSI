@@ -26,7 +26,7 @@ public:
 		size_of_lay[0]= 9;
 		size_of_lay[1]= 1;
 
-		hnc = new HebbNeuronController(2, size_of_lay);
+		hnc = new HebbNeuronController(2, size_of_lay, size_of_lay[0]);
 	}
 
 	double ask(double * input){
@@ -41,7 +41,7 @@ public:
 
 		while( iterations > 0 ){
 
-			for( int i = 0; i< rows_of_data; i ++){
+			for( int i = 0; i< columns_of_data; i ++){
 					hnc->learn( learn_data[i]);
 			}
 			iterations --;

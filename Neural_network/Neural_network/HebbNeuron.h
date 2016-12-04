@@ -15,29 +15,25 @@ class HebbNeuron
 {
 public:
 	double * weight;
-	//HebbNeuron ** input;
-	HebbNeuron * input;
+//	HebbNeuron * input;
+	double * input;
+
 	int size;
 	double w_0;
 
 	double learn_number;
 	double output;
 
-	HebbNeuron(){}
+	HebbNeuron(){	}
 
-	HebbNeuron(int size, HebbNeuron * hebb_neuron){
-		learn_number = 0.6;
+	void init(int size){
+		learn_number = 0.1;
 		this->size = size;
 
 		weight = new double[size];
+		input = new double[size];
 
 		initialize_weight();
-
-		input = new HebbNeuron [size];
-		for (int i = 0; i < size; i++)
-		{
-			input[i] = hebb_neuron[i];
-		}
 		output = -1;
 	}
 
@@ -45,6 +41,8 @@ public:
 	{
 		if (weight)
 			delete[] weight;
+		if (input)
+			delete [] input;
 	}
 
 	void initialize_weight()
@@ -58,38 +56,43 @@ public:
 
 	double activation_function(double s)
 	{
-		double result, beta = 0.6;
-		result = 1.0 / (1.0 + exp((-beta) * s));
+//		double result, beta = 0.6;
+//		result = 1.0 / (1.0 + exp((-beta) * s));
+
+		double result;
+		if(s < 0)	result = -1;
+		else	result = 1;
 
 		return result;
 	}
 
-	void ask()
+
+
+	void ask(double * input)
 	{
 		double s = w_0;
 		for(int i = 0; i < size; i++)
-			s += weight[i] * input[i].output;
+			s += weight[i] * input[i];
 
-		//output = activation_function(s);
+		activation_function(s);
 		output = s;
 	}
 
-	void learn(double d)
+	void learn(double d, double * input)
 	{
 		for(int i = 0; i < size; i++)
-			weight[i] += learn_number * d * input[i].output;
+			weight[i] += learn_number * d * input[i];
 
 		w_0 += learn_number * d;
 	}
 
-	void learn()
+	void learn(double * input)
 	{
 		for(int i = 0; i < size; i++)
-			weight[i] += learn_number * output * input[i].output;
+			weight[i] += learn_number * output * input[i];
 
 		w_0 += learn_number * output;
 	}
-
 
 	HebbNeuron & operator = (HebbNeuron & p1)
 	{

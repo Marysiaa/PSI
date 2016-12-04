@@ -6,7 +6,9 @@
 #include"LogicGates.h"
 #include"ClassificationFunction.h"
 #include"XOR.h"
-#include"HebbUsage.h"
+#include"HebbAll.h"
+
+#include"KohenNeuron.h"
 
 using namespace std;
 
@@ -14,6 +16,7 @@ void logic_gates();
 void classification_function();
 void XOR_function();
 void Hebb();
+void KohenNetwork();
 
 int main() 
 {
@@ -35,100 +38,96 @@ int main()
 
 /*
 	hebb
- */
 	Hebb();
+ */
 
+	/*
+	 * siec Kohena
+	 */
+
+	KohenNetwork();
 
 //	system("pause");
-
 	return 0;
 }
 
+void KohenNetwork(){
+
+
+}
+
 void Hebb(){
-	cout << "\t\tHebb\n";
 
-	//int amonut_of_iterations = 1;
-	int rows_of_data = 9;
-	int columns_of_data = 2;
-	double result;
+	double* input1 = new double [3];
+		input1[0] = -1.0;
+		input1[1] = 1.0;
+		input1[2] = -1.0;
+	double* input2 = new double [3];
+		input2[0] = 1.0;
+		input2[1] = 1.0;
+		input2[2] = 1.0;
 
-	HebbUsage * hebbUsage = new HebbUsage( columns_of_data, rows_of_data);
+		double d1 = -1;
+		double d2 = 1;
 
-	double ** learn_data = new double* [rows_of_data];
-	for( int i = 0; i< rows_of_data; i ++){
-		learn_data[i] = new double [columns_of_data];
-	}
-	double * learn_data_1 = new double[9];
-	double * learn_data_2 = new double[9];
-
-	//dane 1:
-	learn_data_1[0] = -1;
-	learn_data_1[1] = 1;
-	learn_data_1[2] = -1;
-	learn_data_1[3] = 1;
-	learn_data_1[4] = -1;
-	learn_data_1[5] = 1;
-	learn_data_1[6] = -1;
-	learn_data_1[7] = 1;
-	learn_data_1[8] = -1;
-
-	//dane 2:
-	learn_data_2[0] = -1;
-	learn_data_2[1] = 1;
-	learn_data_2[2] = 1;
-	learn_data_2[3] = 1;
-	learn_data_2[4] = 1;
-	learn_data_2[5] = 1;
-	learn_data_2[6] = 1;
-	learn_data_2[7] = 1;
-	learn_data_2[8] = 1;
-
-	learn_data[0] = learn_data_1;
-	learn_data[1] = learn_data_2;
-
-	//-------------------------------------------
-
+		HebbAll * ha = new HebbAll();
+		ha->init(3);
 /*
-		cout << "\nlearn_without_supervisor\n";
-
-	hebbUsage->learn_without_supervisor(learn_data, 1);
-		result = hebbUsage->ask( learn_data_1 );
-		cout << "\t" << result << "\n";
-		result = hebbUsage->ask( learn_data_2 );
-		cout << "\t" << result << "\n";
-
-	hebbUsage->learn_without_supervisor(learn_data, 3);
-		result = hebbUsage->ask( learn_data_1 );
-		cout << "\t" << result << "\n";
-		result = hebbUsage->ask( learn_data_2 );
-		cout << "\t" << result << "\n";
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn(input1);
+			ha->learn(input2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn(input1);
+			ha->learn(input2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn(input1);
+			ha->learn(input2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn(input1);
+			ha->learn(input2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn(input1);
+			ha->learn(input2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn(input1);
+			ha->learn(input2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
 */
-/*
-		cout << "\nlearn_with_supervisor\n";
-	hebbUsage->learn_with_supervisor(learn_data, 1);
-		result = hebbUsage->ask( learn_data_1 );
-		cout << "\t" << result << "\n";
-		result = hebbUsage->ask( learn_data_2 );
-		cout << "\t" << result << "\n";
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn_with_teacher(input1, d1);
+			ha->learn_with_teacher(input2, d2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn_with_teacher(input1, d1);
+			ha->learn_with_teacher(input2, d2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn_with_teacher(input1, d1);
+			ha->learn_with_teacher(input2, d2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn_with_teacher(input1, d1);
+			ha->learn_with_teacher(input2, d2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn_with_teacher(input1, d1);
+			ha->learn_with_teacher(input2, d2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
+			ha->learn_with_teacher(input1, d1);
+			ha->learn_with_teacher(input2, d2);
+		cout << ha->get_and_set_output(input1)<< endl;
+		cout << ha->get_and_set_output(input2)<< endl;
 
-	hebbUsage->learn_without_supervisor(learn_data, 3);
-		result = hebbUsage->ask( learn_data_1 );
-		cout << "\t" << result << "\n";
-		result = hebbUsage->ask( learn_data_2 );
-		cout << "\t" << result << "\n";
-*/
 
-	//------------------------------------------
-	/*
-	for (int i = 0; i< columns_of_data; i++){
-		cout << result[i] << "\t";
-	}
-	*/
-
-	for( int i = 0; i< rows_of_data; i ++){
-		delete [] learn_data[i];
-	}
-	delete learn_data;
 }
 
 void XOR_function(){

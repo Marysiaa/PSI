@@ -1,7 +1,6 @@
 main.d: ../main.cpp ../LogicGates.h ../PerceptronController.h \
  ../Perceptron.h ../ClassificationFunction.h ../XOR.h ../Adaline_MLP.h \
- ../AdalineController.h ../Adaline.h ../HebbUsage.h \
- ../HebbNeuronController.h ../HebbNeuron.h
+ ../AdalineController.h ../Adaline.h ../HebbAll.h ../KohenNeuron.h
 
 ../LogicGates.h:
 
@@ -19,8 +18,6 @@ main.d: ../main.cpp ../LogicGates.h ../PerceptronController.h \
 
 ../Adaline.h:
 
-../HebbUsage.h:
+../HebbAll.h:
 
-../HebbNeuronController.h:
-
-../HebbNeuron.h:
+../KohenNeuron.h:
