@@ -8,7 +8,7 @@
 #include"XOR.h"
 #include"HebbAll.h"
 
-#include"KohenNeuron.h"
+#include"KohonenNetwork.h"
 
 using namespace std;
 
@@ -16,7 +16,8 @@ void logic_gates();
 void classification_function();
 void XOR_function();
 void Hebb();
-void KohenNetwork();
+void Kohonen();
+void Hopfield();
 
 int main() 
 {
@@ -43,17 +44,124 @@ int main()
 
 	/*
 	 * siec Kohena
+	Kohonen();
 	 */
 
-	KohenNetwork();
+	/*
+	 * siec Hopfielda
+	 */
+	Hopfield();
 
 //	system("pause");
 	return 0;
 }
 
-void KohenNetwork(){
+void Hopfield(){
+
+cout << "sieci Hopfielda" << endl;
+
+}
+
+void Kohonen(){
+
+	//uczace
+	double* input1 = new double [2];
+			input1[0] = 0.97;
+			input1[1] = 0.2;
+	double* input2 = new double [2];
+			input2[0] = -0.72;
+			input2[1] = 0.7;
+	double* input3 = new double [2];
+			input3[0] = -0.8;
+			input3[1] = 0.6;
+	double* input4 = new double [2];
+			input4[0] = 0.2;
+			input4[1] = -0.97;
+			double* input5 = new double [2];
+					input5[0] = 1.0;
+					input5[1] = 0.0;
+			double* input6 = new double [2];
+					input6[0] = -0.67;
+					input6[1] = 0.74;
+			double* input7 = new double [2];
+					input7[0] = 0.0;
+					input7[1] = -1.0;
+			double* input8 = new double [2];
+					input8[0] = 0.3;
+					input8[1] = -0.95;
+
+	//testujace
+	double* test1 = new double [2];
+	test1[0] = 0.8;
+	test1[1] = 0.1;
+	double* test2 = new double [2];
+	test2[0] = -0.47;
+	test2[1] = 0.8;
+	double* test3 = new double [2];
+	test3[0] = 0.1;
+	test3[1] = -0.65;
 
 
+	int amount_of_neurons = 3;
+	int size_of_input = 2;
+
+	double *outs1 = new double[amount_of_neurons];
+	double *outs2 = new double[amount_of_neurons];
+	double *outs3 = new double[amount_of_neurons];
+
+	KohonenNetwork * network = new KohonenNetwork(size_of_input, amount_of_neurons);
+
+	outs1 = network->ask_for_outputs(test1);
+	outs2 = network->ask_for_outputs(test2);
+	outs3 = network->ask_for_outputs(test3);
+
+	cout << "wyniki testu przed uczeniem " << endl;
+	for(int i =0; i< amount_of_neurons; i++)
+	{
+		if(outs1[i] == 1)
+			cout << "test: 1 \t" << "grupa: " << i+1 << endl;
+		if(outs2[i] == 1)
+			cout << "test: 2 \t" << "grupa: " << i+1 << endl;
+		if(outs3[i] == 1)
+			cout << "test: 3 \t" << "grupa: " << i+1 << endl;
+	}
+	cout << endl;
+// ---------------------------------------------------
+	int amount_of_iterations = 1, x = 0;
+
+	for(int nr=1; nr<10; nr+=2){
+		x+= nr;
+		amount_of_iterations = nr;
+
+		for(int i=0; i< amount_of_iterations; i++)
+		{
+			network->learn_WTA(input1);
+			network->learn_WTA(input2);
+			network->learn_WTA(input3);
+			network->learn_WTA(input4);
+			network->learn_WTA(input5);
+			network->learn_WTA(input6);
+			network->learn_WTA(input7);
+			network->learn_WTA(input8);
+		}
+	// ---------------------------------------------------
+
+		outs1 = network->ask_for_outputs(test1);
+		outs2 = network->ask_for_outputs(test2);
+		outs3 = network->ask_for_outputs(test3);
+
+		cout << endl << "wyniki testu po " << x << " iteracjach uczenia" << endl;
+		for(int i =0; i< amount_of_neurons; i++)
+		{
+			if(outs1[i] == 1)
+				cout << "test: 1 \t" << "grupa: " << i+1 << endl;
+			if(outs2[i] == 1)
+				cout << "test: 2 \t" << "grupa: " << i+1 << endl;
+			if(outs3[i] == 1)
+				cout << "test: 3 \t" << "grupa: " << i+1 << endl;
+		}
+		cout << endl;
+	}
 }
 
 void Hebb(){
