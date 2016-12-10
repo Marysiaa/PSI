@@ -7,7 +7,6 @@
 #include"ClassificationFunction.h"
 #include"XOR.h"
 #include"HebbAll.h"
-
 #include"KohonenNetwork.h"
 
 using namespace std;
