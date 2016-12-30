@@ -8,6 +8,8 @@
 #include"XOR.h"
 #include"HebbAll.h"
 #include"KohonenNetwork.h"
+#include"HopfieldNewtork.h"
+#include"HopfieldTest.h"
 
 using namespace std;
 
@@ -58,6 +60,70 @@ int main()
 void Hopfield(){
 
 cout << "sieci Hopfielda" << endl;
+
+int size_of_input = 9;
+HopfieldTest ht(size_of_input);
+
+// *** uczace ***
+
+int amount_of_input_vetors = 7;
+double ** learn_input = new double *[amount_of_input_vetors];
+for ( int i = 0; i < amount_of_input_vetors; ++i )
+	learn_input[i] = new double [size_of_input];
+
+double* input1 = new double [9] {1,-1,1,-1,1,-1,1,-1,1};	//win x
+double* input2 = new double [9] {-1,-1,-1,1,1,-1,-1,1,1};	//win o
+double* input3 = new double [9] {-1,-1,1,-1,1,-1,-1,-1,1};	//win x
+double* input4 = new double [9] {1,-1,-1,-1,-1,1,1,-1,1};	//win o
+double* input5 = new double [9] {1,1,-1,1,-1,-1,1,-1,1};	//win x
+double* input6 = new double [9] {-1,-1,1,-1,-1,1,1,1,-1};	//not
+double* input7 = new double [9] {-1,1,1,1,1,-1,-1,-1,1};	//not
+
+for ( int j = 0; j < size_of_input; ++j )
+{
+	learn_input[0][j] = input1[j];
+	learn_input[1][j] = input2[j];
+	learn_input[2][j] = input3[j];
+	learn_input[3][j] = input4[j];
+	learn_input[4][j] = input5[j];
+	learn_input[5][j] = input6[j];
+	learn_input[6][j] = input7[j];
+}
+
+// ustawienie wektora uczacego
+ht.set_input(amount_of_input_vetors, learn_input);
+
+
+// *** testujace ***
+double* input8 = new double [9] {1,1,1,-1,-1,1,1,-1,-1};	//win x
+double* input9 = new double [9] {-1,1,-1,1,-1,1,-1,1,-1};	//win o
+double* input10 = new double [9] {1,1,-1,1,1,-1,-1,-1,1};	//not
+
+/*
+amount_of_input_vetors = 3;
+double ** test_input = new double *[amount_of_input_vetors];
+for ( int i = 0; i < amount_of_input_vetors; ++i )
+	test_input[i] = new double [size_of_input];
+for ( int j = 0; j < size_of_input; ++j )
+{
+	test_input[0][j] = input8[j];
+	test_input[1][j] = input9[j];
+	test_input[2][j] = input10[j];
+}
+*/
+
+ht.print_weights();
+ht.ask_network(input1);
+
+for(int i =0; i< 100; i++)
+{
+	ht.learn_network();
+}
+
+cout << endl;
+
+ht.print_weights();
+ht.ask_network(input1);
 
 }
 

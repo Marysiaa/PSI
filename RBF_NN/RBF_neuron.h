@@ -14,7 +14,7 @@ class RBF_neuron
 {
 private:
 	double * weights;
-	double bias;
+	double output, sigma;
 	int size_of_input;
 
 public:
@@ -25,8 +25,9 @@ public:
 			delete[] weights;
 	}
 
-	void init(int size_of_input)
+	void init(int size_of_input, double sigma)
 	{
+		this->sigma = sigma;
 		this->size_of_input = size_of_input;
 		weights = new double[size_of_input];
 
@@ -45,9 +46,11 @@ public:
 		{
 			diff[i] = weights[i] - input[i];
 		}
-		s = bias * get_vector_length( diff, size_of_input);
-		a = activation_function(s);
+		s = get_vector_length( diff, size_of_input);
+//		cout << endl << "bias: "<< bias << "\t s: " << s << endl;
+		a = gauss_function(s);
 
+		output = a;
 		return a;
 	}
 
@@ -62,9 +65,11 @@ public:
 	}
 
 private:
-	double activation_function(double s)
+	double gauss_function(double s)
 	{
-		return exp(- (s * s));
+		double result = exp(-(s * s) / (2*sigma*sigma));
+//		cout << endl << s << "\tresult: " << result << endl;
+		return result;
 	}
 
 	double get_vector_length(double * vector, int size_of_vector)
@@ -75,6 +80,8 @@ private:
 			vector_length += (vector[i] * vector[i]);
 		}
 		vector_length = sqrt(vector_length);
+
+//		cout << endl << "\t vetor_length: " << vector_length << endl;
 		return vector_length;
 	}
 
@@ -84,6 +91,8 @@ private:
 			weights[i] = (double)rand() / (double)RAND_MAX;
 		}
 	}
+
+
 
 };
 

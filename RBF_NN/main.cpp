@@ -23,7 +23,7 @@ int main()
 	test.print_parameters();
 	test.print_weights();
 
-	cout << test.get_result();
+	test.print_test_results();
 
 
 	return 0;

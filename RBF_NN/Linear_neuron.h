@@ -16,7 +16,7 @@ class Linear_neuron
 {
 private:
 	double * weights;
-	double bias;
+	double bias, w0;
 	int size_of_input;
 
 public:
@@ -29,6 +29,7 @@ public:
 
 	void init(int size_of_input)
 	{
+		bias = 1;
 		this->size_of_input = size_of_input;
 		weights = new double[size_of_input];
 
@@ -47,7 +48,9 @@ public:
 		{
 			s += (weights[i] * input[i]);
 		}
-		s += bias;
+		s += (bias * w0);
+//		cout << endl << "bias: " << bias << "\t w0: "<< w0 << "\t s:" << s << endl;
+
 		y = activation_function(s);
 
 		return y;
@@ -77,8 +80,23 @@ private:
 		for (int i = 0; i < size_of_input; i++){
 			weights[i] = (double)rand() / (double)RAND_MAX;
 		}
+		w0 = (double)rand() / (double)RAND_MAX;
 	}
 
+	void normalize_vector(double * vector, int size_of_vector)
+	{
+		double vector_length = 0;
+		for(int i = 0; i < size_of_vector; i++)
+		{
+			vector_length += (vector[i] * vector[i]);
+		}
+		vector_length = sqrt(vector_length);
+
+		for(int i = 0; i < size_of_vector; i++)
+		{
+			vector[i] = (vector[i] / vector_length);
+		}
+	}
 };
 
 #endif /* LINEAR_NEURON_H_ */

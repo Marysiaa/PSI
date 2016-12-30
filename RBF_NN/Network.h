@@ -21,9 +21,13 @@ private:
 public:
 	RBF_neuron * rbf_layer;
 	Linear_neuron * linear_layer;
+	double sigma;
 
 public:
-	Network(){}
+	Network()
+	{
+		sigma = 0.6;
+	}
 	~Network()
 	{
 		if (rbf_layer)
@@ -44,7 +48,7 @@ public:
 		rbf_layer = new RBF_neuron[size_of_rbf_layer];
 		for(int i =0; i<size_of_rbf_layer; i++)
 		{
-			rbf_layer[i].init(size_of_input);
+			rbf_layer[i].init(size_of_input, sigma);
 		}
 
 		linear_layer = new Linear_neuron[size_of_linear_layer];
@@ -54,9 +58,9 @@ public:
 		}
 	}
 
-	double ask_network(double * input)
+	double * ask_network(double * input)
 	{
-		double network_out = -1;
+		double * network_out = new double[size_of_linear_layer];
 		double * rbf_outs = new double[size_of_rbf_layer];
 		double * linear_outs = new double[size_of_linear_layer];
 
@@ -64,14 +68,26 @@ public:
 		{
 			rbf_outs[i] = rbf_layer[i].ask(input);
 		}
+//		normalize_vector(rbf_outs, size_of_rbf_layer );
+
+cout << "rbf layer outputs: "<< endl;
+for(int i =0; i<size_of_rbf_layer; i++)
+	cout << rbf_outs[i] << "\t";
+cout << endl;
 
 		for(int i =0; i<size_of_linear_layer; i++)
 		{
 			linear_outs[i] = linear_layer[i].ask(rbf_outs);
 		}
 
+cout << "linear layer outputs: "<< endl;
+for(int i =0; i<size_of_linear_layer; i++)
+	cout << linear_outs[i] << "\t";
+cout << endl << endl;
+
 		for(int i =0; i< size_of_linear_layer; i++)
 		{
+/*
 			if(linear_outs[i] == 1)
 			{
 				if(network_out != -1)
@@ -81,6 +97,8 @@ public:
 				}
 				network_out = i;
 			}
+*/
+			network_out[i] = linear_outs[i];
 		}
 		return network_out;
 	}

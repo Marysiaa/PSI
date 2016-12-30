@@ -48,9 +48,25 @@ public:
 	}
 	~Test_usage(){}
 
-	double get_result()
+	void print_test_results()
 	{
-		network->ask_network(test1);
+		double * outs1, * outs2, * outs3;
+		outs1 = network->ask_network(test1);
+		outs2 = network->ask_network(test2);
+		outs3 = network->ask_network(test3);
+
+		cout << endl;
+		for (int i = 0; i< size_of_linear_layer; i++)
+			cout << outs1[i] << "\t ";
+		cout << endl;
+
+		for (int i = 0; i< size_of_linear_layer; i++)
+			cout << outs2[i] << "\t ";
+		cout << endl;
+
+		for (int i = 0; i< size_of_linear_layer; i++)
+			cout << outs3[i] << "\t ";
+		cout << endl;
 	}
 
 	void init_inputs()
@@ -104,7 +120,7 @@ public:
 
 	void print_weights()
 	{
-		cout << "\t   rbf_layer \n wagi:" << endl;
+		cout << "\t   rbf_layer \n weights:" << endl;
 		for(int i=0; i < size_of_rbf_layer; i++)
 		{
 			for(int j=0; j < size_of_input; j++)
@@ -115,7 +131,7 @@ public:
 		}
 		cout << endl;
 
-		cout << "\t   linear_layer \n wagi:" << endl;
+		cout << "\t   linear_layer \n weights:" << endl;
 		for(int i=0; i < size_of_linear_layer; i++)
 		{
 			for(int j=0; j < size_of_rbf_layer; j++)
