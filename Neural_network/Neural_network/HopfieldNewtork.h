@@ -16,6 +16,7 @@ public:
 	HopfieldNeuron * neurons;
 	int size_of_input, number_of_neurons, amount_of_input_vetors;
 	double ** weights, **input;
+	double *ask_input;
 
 
 	HopfieldNetwork( int size_of_input)
@@ -23,6 +24,7 @@ public:
 		this->size_of_input = size_of_input;
 		this->number_of_neurons = size_of_input;
 
+		this->ask_input = new double[size_of_input];
 		neurons = new HopfieldNeuron[number_of_neurons];
 		weights = new double *[number_of_neurons];
 
@@ -33,9 +35,6 @@ public:
 
 		for(int i=0; i< number_of_neurons; i++)
 			neurons[i].init(number_of_neurons);
-
-
-
 	}
 
 	~HopfieldNetwork()
@@ -61,27 +60,62 @@ public:
 		}
 	}
 
-	void ask_neuron(int neuron_number, double * ask_input)
+	void set_ask_input(double *input)
 	{
-		double s;
-		for (int j = 0; j < number_of_neurons; j++)
+		for (int j = 0; j < size_of_input; j++)
 		{
-			s += ((weights[neuron_number][j] * neurons[j].old_output) + ask_input[neuron_number]);
-
-			activation_function(s, neuron_number);
-			cout << neurons[neuron_number].output << "\t";
+			ask_input[j] = input[j];
+//			cout << "ask_input[" << j << "] " <<  ask_input[j] << endl;
 		}
-		cout << endl;
 	}
 
-	void activation_function(double s, int neuron_number)
+	int ask_neurons()
 	{
-		if(s < 0)
-			neurons[neuron_number].output = 1.0;
+		double s;
+		int result = 0;
+//		cout << endl << endl;
+		for (int i = 0; i < number_of_neurons; i++)
+		{
+			s = 0;
+			for (int j = 0; j < size_of_input; j++)
+			{
+				if(i != j )
+					s += ((weights[i][j] * neurons[j].old_output) + ask_input[i]);
+
+/*
+			cout << "weights[" << i << "][" << j << "] = " << weights[i][j] <<
+					"\t neurons[j].old_output = " << neurons[j].old_output <<
+					"\t ask_input[i] = " << ask_input[i] <<
+					"\t s = " << s << endl;
+*/
+			}
+
+			neurons[i].old_output = neurons[i].output;
+			neurons[i].output = activation_function(s, i);
+//			cout << endl << " neurons[" << i << "].output = " <<  neurons[i].output << endl << endl;
+			result += neurons[i].output;
+		}
+//		cout << endl << "result = " << result << endl;
+		return result;
+	}
+
+	int activation_function(double s, int neuron_number)
+	{
+		if(s > 0)
+		{
+//			cout << "1.0" << endl;
+			return 1.0;
+		}
 		else if(s == 0)
-			neurons[neuron_number].output = neurons[neuron_number].old_output;
+		{
+//			cout << "old for " << neuron_number << " = " << neurons[neuron_number].old_output << endl;
+			return neurons[neuron_number].old_output;
+		}
 		else if (s < 0)
-			neurons[neuron_number].output = -1.0;
+		{
+//			cout << "-1.0" << endl;
+			return -1.0;
+		}
 	}
 
 	void learn_with_hebb_method()

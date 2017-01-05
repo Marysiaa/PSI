@@ -29,6 +29,11 @@ public:
 		network->set_input(amount_of_input_vetors, input);
 	}
 
+	void set_ask_input(double *input)
+	{
+		network->set_ask_input(input);
+	}
+
 	void print_weights()
 	{
 		cout << endl;
@@ -36,17 +41,16 @@ public:
 		{
 			for(int j=0; j< size_of_input; j++)
 			{
-				cout << network->weights[i][j] << " \t ";
+				cout << network->weights[i][j] << "\t\t ";
 			}
 			cout << endl;
 		}
 		cout << endl;
 	}
 
-	void ask_network(double *ask_input)
+	int ask_network()
 	{
-		for(int i=0; i< size_of_input; i++)
-			network->ask_neuron(i, ask_input);
+			return network->ask_neurons();
 	}
 
 	void learn_network()

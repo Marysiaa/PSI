@@ -22,7 +22,7 @@ public:
 
 	void init(int number_of_neurons)
 	{
-		old_output = 0;
+		old_output = 1;
 		this->number_of_neurons = number_of_neurons;
 	}
 

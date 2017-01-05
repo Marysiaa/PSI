@@ -50,10 +50,13 @@ int main()
 
 	/*
 	 * siec Hopfielda
-	 */
 	Hopfield();
+	 */
 
 //	system("pause");
+
+
+
 	return 0;
 }
 
@@ -61,7 +64,7 @@ void Hopfield(){
 
 cout << "sieci Hopfielda" << endl;
 
-int size_of_input = 9;
+int size_of_input = 9, amount_of_learn_iters = 100;
 HopfieldTest ht(size_of_input);
 
 // *** uczace ***
@@ -93,7 +96,6 @@ for ( int j = 0; j < size_of_input; ++j )
 // ustawienie wektora uczacego
 ht.set_input(amount_of_input_vetors, learn_input);
 
-
 // *** testujace ***
 double* input8 = new double [9] {1,1,1,-1,-1,1,1,-1,-1};	//win x
 double* input9 = new double [9] {-1,1,-1,1,-1,1,-1,1,-1};	//win o
@@ -112,18 +114,31 @@ for ( int j = 0; j < size_of_input; ++j )
 }
 */
 
+cout << "poczatkowe losowe wagi: " << endl;
 ht.print_weights();
-ht.ask_network(input1);
 
-for(int i =0; i< 100; i++)
+cout << "uczenie - ilosc iteracji = " << amount_of_learn_iters << endl;
+for(int i =0; i< amount_of_learn_iters; i++)
 {
 	ht.learn_network();
 }
 
-cout << endl;
-
+cout << endl << "wagi po uczeniu: " << endl;
 ht.print_weights();
-ht.ask_network(input1);
+
+//cout << endl << "podanie wektora wejsciowego - testowego " << endl << endl;
+ht.set_ask_input(input8);
+
+cout << endl << "odpytanie (1) " << endl;
+cout << "wynik: \t" << ht.ask_network();
+
+ht.set_ask_input(input9);
+cout << endl << "odpytanie (-1) " << endl;
+cout << "wynik: \t" << ht.ask_network();
+
+ht.set_ask_input(input1);
+cout << endl << "odpytanie (1) " << endl;
+cout << "wynik: \t" << ht.ask_network();
 
 }
 
